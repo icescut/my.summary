@@ -42,7 +42,8 @@ StopIteration
 
 **判断迭代器**   
 * 使用内置函数`isinstance`判断是否迭代器。
-* 可迭代对象`Iterable`和迭代器`Iterator`来自`collections`包
+* 可迭代对象`Iterable`和迭代器`Iterator`来自`collections`包。  
+* 迭代器实际也是一个可迭代对象。  
 
 ```python
 >>> s = "hi"
@@ -79,7 +80,7 @@ True
 >>>
 ```
 
-正因为这样，容器并没实现为简单的迭代器，而是实现为可迭代对象，使可迭代对象与迭代器分开。  
+正因为这样，容器并没实现为简单的迭代器，而是实现为可迭代对象，使可迭代对象与迭代器分开，这样就可重复迭代。  
 ```python
 >>> class ListIterable():
     def __init__(self, data):
@@ -195,3 +196,46 @@ Python有两种不同方式提供生成器：
 
 ### range
 Python 2中`range`创建列表，`xrange`创建生成器。Python 3中已经没有`xrange` ，而`range`相当于python 2中`xrange`。   
+
+## itertools
+itertools包提供了一些函数用于有效地创建迭代器。  
+
+### 无限迭代器
+####  count
+语法：`count([start[, step]])`  
+创建一个从start开始，每次增加step的无限迭代器。一般只用于创建数值迭代器，但应该可以用于所有实现了加法的对象。  
+```python
+>>> it = count(10, 3)
+>>> for i in range(12):
+	print(next(it), end=" ")
+
+
+10 13 16 19 22 25 28 31 34 37 40 43
+```
+
+####  cycle
+语法：`cycle(itrable)`  
+当传入的`iterable`对象迭代完了，又从头开始迭代，如此不断。  
+```python
+>>> it = cycle("hello")
+>>> for i in range(12):
+	print(next(it), end=" ")
+
+
+h e l l o h e l l o h e
+```
+
+####  repeat
+语法：`repeat(object [,times])`  
+不断重复一个对象，除非声明了times，则为重复一个对象times次。  
+```python
+>>> it = repeat("hi", 5)
+>>> for i in range(12):
+	print(next(it), end=" ")
+
+
+hi hi hi hi hi Traceback (most recent call last):
+  File "<pyshell#40>", line 2, in <module>
+    print(next(it), end=" ")
+StopIteration
+```

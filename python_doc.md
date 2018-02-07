@@ -1,4 +1,10 @@
 # python文档相关
+
+大纲：
+* docstring
+* pydoc
+* doctest
+
 ## docstring
 docstring(文档字符串)是一个函数或类的说明，函数或类定义时写在最前面的第一个字符串则按规定成为文档字符串。  
 可以通过`help`函数或`__doc__`方法获得一个函数或类的文档字符串。  
@@ -16,7 +22,7 @@ sum(a, b)
 >>> class A():
 	"""just a test class"""
 
-	
+
 >>> help(A)
 Help on class A in module __main__:
 
@@ -54,7 +60,7 @@ by whitespace.  The base defaults to 10.  Valid bases are 0 and 2-36.
 Base 0 means to interpret the base from the string as an integer literal.
 >>> int('0b100', base=0)
 4
->>> 
+>>>
 ```
 
 ## pydoc
@@ -186,7 +192,7 @@ python -m pydoc -p 1234
 使用`-p`选项，后跟端口号。这时在浏览器中输入`localhost:1234`便可以访问服务器，包括当前目录下的模块和内置模块和自带模块和安装到site-packages的第三方库。  
 
 ### HTML生成器模式
-生成静态的HTML文档。 
+生成静态的HTML文档。
 ```python
 python -m pydoc -w mymod mymod.html
 ```
@@ -211,7 +217,7 @@ Each '>>>' line is run as if in a python shell, and counts as a test.
 The next line, if not '>>>' is the expected output of the previous line.
 If anything doesn't match exactly (including trailing spaces), the test fails.
 '''
- 
+
 def multiply(a, b):
     """
     >>> multiply(4, 3)

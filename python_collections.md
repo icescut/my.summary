@@ -1,5 +1,9 @@
-# collections
+# 容器
 collections包中实现了一些python内置数据结构之外的数据结构。  
+
+大纲：
+* ChainMap
+* deque
 
 ## ChainMap
 ChainMap将多个字典组合成一个可更新的视图。可在ChainMap上执行字典的基本操作。  
@@ -85,9 +89,6 @@ if __name__ == '__main__':
 > test
 
 这次调用，第一次调用`main`时，`command_line_arguments`中没有值，则使用`os.environ`中的值`xxxx`。第二次调用`main`时，`os.environ`的`username`也改变为`test`，所以返回`test`。  
-
-
-
 
 ## deque
 deque是一个双向队列，比如可以用于保留最后N个元素。  

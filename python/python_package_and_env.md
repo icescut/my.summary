@@ -70,7 +70,15 @@ pip install --upgrade request
 pip uninstall request
 ```
 
-
+### 配置国内源
+首先在window的文件夹窗口输入 ：  %APPDATA%  
+然后在底下新建pip文件夹，然后到pip文件夹里面去新建个pip.ini,然后再里面输入内容  
+```
+[global]
+timeout = 6000
+index-url = http://pypi.douban.com/simple
+trusted-host = pypi.douban.com
+```   
 
 ## virtualenv
 在开发Python应用程序的时候，所有第三方的包都会被pip安装到Python的site-packages目录下。  

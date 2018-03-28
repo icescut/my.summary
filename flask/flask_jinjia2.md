@@ -45,11 +45,10 @@ def hello():
     }
     return render_template('hello.html', **context)
 ```
+如果参数比较多，则使用一个字典保存所有参数，然后使用`**`解包为关键字参数。  
 
-## 语法
-* 表达式，`{{ expression }}`   
-* 语句，`{% statement %}`   
-* 注释，`{# ... #}`
+## 表达式
+`{{ expression }}`   
 
 ## 变量访问
 使用{{ object.attr}}或{{ object["attr"]}}的方式设置对象的属性或字典的键值是类似的，只是调用`getattr(object, 'attr')`和`object.__getitem__('attr')`的顺序不同而且。  
@@ -85,3 +84,100 @@ def hello():
 
     return render_template('index2.html', fruit=fruit, person=p)
 ```
+
+## 语句
+`{% statement %}`   
+
+### 控制结构
+#### 条件
+```
+{% if user %}
+    Hello, {{ user }}!
+{% else %}
+    Hello, Stranger!
+{% endif %}
+```
+
+#### 循环
+```
+<ul>
+    {% for comment in comments%}
+        <li>{{ comment }}</li>
+    {% endfor %}
+</ul>
+```
+
+#### 宏
+宏类似于Python中的函数。  
+定义宏：
+```
+{% macro render_comment(comment) %}
+    <li>{{ comment }}</li>
+{% endmacro %}
+```
+使用宏：
+```
+<ul>
+    {% for comment in comments%}
+        {{ render_comment(comment) }}
+    {% endfor %}
+</ul>
+```
+也可以将宏保存在另外的文件中，然后导入使用：
+```
+{% import 'macros.html' as macros %}
+<ul>
+    {% for comment in comments%}
+        {{ macros.render_comment(comment) }}
+    {% endfor %}
+</ul>
+```
+
+
+## 注释
+`{# ... #}`
+
+## 过滤器
+可以使用过滤器修改变量，过滤器名添加在变量名之后，中间使用竖线分隔。比如`Hello, {{ name | capitalize}}`以首字母大写显示变量值。  
+
+* safe，渲染时不转义，千万不要用在用户输入上。   
+* capitalize
+
+## 继承
+定义模板:
+```
+<!-- base.html -->
+<html>
+<head>
+    {% block head %}
+    <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+</head>
+<body>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>
+```
+在模板中使用block定义模板中的可变部分，注意block可以嵌套。  
+通过extends继承模板，然后通过block修改可变部分：
+```
+<!-- index.html -->
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style>
+    ...
+    </style>
+{% endblock %}
+{% block body %}
+    <h1>Hello, world</h1>
+{% endblock %}
+```
+可以使用`super()`显示模板的原来的内容，然后可以再其前后添加新内容。  
+
+
+## include
+
+

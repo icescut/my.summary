@@ -6,6 +6,7 @@ python本身就自带了许多有用的模块，比如os、copy等。
 大纲
 * 引用模块
 * 自定义模块
+    - 包
 
 ## 引用模块
 定义一个模块`support.py`。  
@@ -60,7 +61,7 @@ print(full_name())
 ### 包
 可以将多个模块放在包中，简单来说，**包就是文件夹，但该文件夹下必须存在`__init__.py`文件**。
 
-结构：
+**结构：**  
 ```
 package_1
  |----- __init__.py
@@ -71,7 +72,7 @@ package_1
 `import *`这样的语句理论上是希望文件系统找出包中所有的子模块，然后导入它们。这可能会花长时间，并出现边界效应等。Python 解决方案是提供一个明确的包索引。  
 这个索引由`__init__.py`定义`__all__`变量，该变量为一列表。
 
-结构  
+**例子**  
 ```
 pack
  |----- __init__.py
@@ -80,11 +81,12 @@ pack
 test.py
 ```
 
-`__init__.py`
+**__init__.py**  
 ```python
 __all__ = ['support_1', 'support_2']
 ```
-`support_1.py`
+
+**support_1.py**  
 ```python
 first_name = 'Liang'
 last_name = 'Alan'
@@ -92,14 +94,15 @@ last_name = 'Alan'
 def full_name():
     return first_name + ' ' + last_name
 ```
-`support_2.py`
+
+**support_2.py**   
 ```python
 
 def say_hello():
     print('Hello')
 ```
 
-`test.py`
+**test.py**  
 ```python
 from pack import *
 

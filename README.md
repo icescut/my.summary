@@ -89,3 +89,15 @@ my summary of all kind of things
 * leetcode
   * Two sum
   * Palindrome Number
+ 
+ ## TODO
+ - [ ] vimrc setting
+ - [ ] tmux summary
+ - [ ] decimal
+ - [ ] decorator
+ - [ ] os
+ - [ ] os.path
+ - [ ] csv
+ - [ ] vim buffer
+ - [ ] vim window
+ - [ ] vim tab

@@ -1,0 +1,95 @@
+# Add Binary
+
+## 题目
+Given two binary strings, return their sum (also a binary string).
+The input strings are both **non-empty** and contains only characters 1 or 0.
+
+**Example 1:**
+
+```
+Input: a = "11", b = "1"
+Output: "100"
+```
+**Example 2:**
+
+```
+Input: a = "1010", b = "1011"
+Output: "10101"
+```
+
+## 解一
+
+1. 两个字符串同步从后往前扫描，通过判断值和前一次计算得到的进位得到当前位的值和进位。
+2. 如果有一个字符串比较长，继续对该字符串剩余部分和进位进行计算。
+3. 如果最后还有进位，再添一个1。
+
+**要点**
+1. 不要转换字符串为数字，通过条件语句判断。
+2. 不要往结果列表插入，用append，最后再用reverse反转。
+
+```python
+class Solution:
+    def addBinary(self, a, b):
+        i = len(a) - 1
+        j = len(b) - 1
+        r = []
+        
+        u = 0
+        while i >= 0 and j >= 0:
+            #n = int(a[i]) + int(b[j]) + u
+            n = u
+            if a[i] == '1':
+                n += 1
+            if b[j] == '1':
+                n += 1
+            if n == 0:
+                r.append('0')
+                u = 0
+            elif n == 1:
+                r.append('1')
+                u = 0
+            elif n == 2:
+                r.append('0')
+                u = 1
+            else:
+                r.append('1')
+                u = 1
+            i = i - 1
+            j = j - 1
+        if i >= 0:
+            while i >= 0:
+                #n = int(a[i]) + u
+                n = u
+                if a[i] == '1':
+                    n += 1
+                if n == 0:
+                    r.append('0')
+                    u = 0
+                elif n == 1:
+                    r.append('1')
+                    u = 0
+                else:
+                    r.append('0')
+                    u = 1
+                i -= 1
+        elif j >= 0:
+            while j >= 0:
+                # n = int(b[j]) + u
+                n = u
+                if b[j] == '1':
+                    n += 1
+                if n == 0:
+                    r.append('0')
+                    u = 0
+                elif n == 1:
+                    r.append('1')
+                    u = 0
+                else:
+                    r.append('0')
+                    u = 1
+                j -= 1
+        if u == 1:
+            r.append('1')
+        r.reverse()
+        return ''.join(r)
+```
